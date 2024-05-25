@@ -4,11 +4,19 @@ import TextReveal from "~/components/text-reveal";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react"
 import Link from "next/link";
-
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/dashboard');
+    }
+  }, [status]);
 
   return (
     <>

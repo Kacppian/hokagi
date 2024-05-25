@@ -36,14 +36,34 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  // callbacks: {
+  //   session: ({ session, token }) => ({
+  //     ...session,
+  //     user: {
+  //       ...session.user,
+  //       id: token,
+  //     },
+  //   }),
+  // },
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  },
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    async jwt({ token, account }) {
+      // Add access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      // Add access_token to the session
+      session.accessToken = token.accessToken as string;
+      return session;
+    },
   },
   providers: [
     Github({
