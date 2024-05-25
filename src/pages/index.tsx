@@ -2,9 +2,14 @@ import Head from "next/head";
 import Button from "~/components/button";
 import TextReveal from "~/components/text-reveal";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { useSession } from "next-auth/react"
+import Link from "next/link";
 
 
 export default function Home() {
+
+  const { data: session, status } = useSession();
+
   return (
     <>
       <Head>
@@ -20,7 +25,7 @@ export default function Home() {
           <TextReveal text="Guiding you towards seamless automation in product and marketing event creation and QA" />
           <Button>
             <div className="flex space-x-2 items-center">
-              <span>Sign In </span>
+              <Link href='/api/auth/signin'>Sign In</Link>
               <GitHubLogoIcon className="size-5" />
             </div>
           </Button>
