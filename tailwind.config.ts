@@ -10,7 +10,8 @@ module.exports = {
         heading: 'rgba(25, 43, 53, 0.5)', // Heading color
         background: '#ffffff', // Primary background color (white),
         default: 'rgba(25, 43, 53, 1)',
-        blue: 'rgba(31, 107, 255, 1)'
+        blue: 'rgba(31, 107, 255, 1)',
+        lightBlue: 'rgba(25, 43, 53, 0.05)'
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'], // Inter font
